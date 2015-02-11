@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+  <theme href="porto/page-left-sidebar.html"/>
+<!--
+  <replace css:theme-children="aside" css:content="#portal-column-two" />
+
+  <replace css:content="ul#portlet-test">
+    <xsl:copy>
+      <xsl:attribute name="class">nav nav-list primary push-bottom</xsl:attribute>
+      <xsl:copy-of select="@*" />
+      <xsl:apply-templates />
+    </xsl:copy>
+  </replace>
+-->
+
+
+</rules>
