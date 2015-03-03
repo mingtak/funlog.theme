@@ -32,4 +32,16 @@
     permission="zope2.View"
     class=".parameters.GetThemeId" />
 
+  <browser:page
+    for="*"
+    name="get_type"
+    permission="zope2.View"
+    class=".parameters.GetContentType" />
+
+  <browser:page
+    for="*"
+    name="is_owner"
+    permission="zope2.View"
+    class=".parameters.IsOwner" />
+
 </configure>

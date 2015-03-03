@@ -6,18 +6,368 @@
     xmlns:xi="http://www.w3.org/2001/XInclude">
 
 
-  <theme href="creatika/index-2.html"/>
-<!--
-  <replace css:theme-children="aside" css:content="#portal-column-two" />
+  <rules css:if-content="#visual-portal-wrapper">
 
-  <replace css:content="ul#portlet-test">
-    <xsl:copy>
-      <xsl:attribute name="class">nav nav-list primary push-bottom</xsl:attribute>
-      <xsl:copy-of select="@*" />
-      <xsl:apply-templates />
-    </xsl:copy>
-  </replace>
--->
+    <theme href="creatika/diazo_album.html" if="$contenttype='Album'" />
+    <theme href="creatika/diazo_folder.html" if="$contenttype='Folder'" />
+    <theme href="creatika/diazo_article.html" if="$contenttype='Article'" />
+    <notheme css:if-content=".template-add-form" />
+    <notheme css:if-content=".template-edit-form" />
 
+    <!-- nav menu -->
+    <replace css:theme-children="ul#menu" css:content-children="ul#funlog-menu-ul" />
+      <!-- dropdown menu -->
+      <replace css:content="li.top-level-menu">
+        <xsl:copy>
+          <xsl:attribute name="class"><xsl:value-of select="./@class" /> dropdown</xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
+      <!-- current selected -->
+      <replace css:content="li.top-level-menu.selected">
+        <xsl:copy>
+          <xsl:attribute name="class"><xsl:value-of select="./@class" /> dropdown current</xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
+
+    <!-- ifolder_iportaltop_slide -->
+    <replace css:theme="div.fullwidthbanner > ul" css:content="ul#funlog-slide-banner" />
+      <!-- slide show -->
+      <replace css:content="ul#funlog-slide-banner li">
+        <xsl:copy>
+          <xsl:attribute name="data-transition">fade</xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
+      <!-- blogName, title -->
+      <replace css:content="div#slide-show-blog-title">
+        <xsl:copy>
+          <xsl:attribute name="class">caption headline sft</xsl:attribute>
+          <xsl:attribute name="data-x">center</xsl:attribute>
+          <xsl:attribute name="data-y">100</xsl:attribute>
+          <xsl:attribute name="data-speed">700</xsl:attribute>
+          <xsl:attribute name="data-start">700</xsl:attribute>
+          <xsl:attribute name="data-easing">easeOutBack</xsl:attribute>
+          <xsl:element name="span">
+            <xsl:attribute name="class">bullet</xsl:attribute>
+          </xsl:element>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
+      <!-- blogDescription, description -->
+      <replace css:content="div#slide-show-blog-description">
+        <xsl:copy>
+          <xsl:attribute name="class">caption text text-center sfr</xsl:attribute>
+          <xsl:attribute name="data-x">center</xsl:attribute>
+          <xsl:attribute name="data-y">400</xsl:attribute>
+          <xsl:attribute name="data-speed">700</xsl:attribute>
+          <xsl:attribute name="data-start">2000</xsl:attribute>
+          <xsl:attribute name="data-easing">easeOutBack</xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
+
+    <!-- All site search -->
+    <copy attributes="action method" css:theme="form#custom-search-form" css:content="div.funlog_site_search form" />
+    <copy attributes="name placeholder" css:theme="form#custom-search-form input" css:content="div.funlog_site_search form input" />
+
+
+    <!-- social-link -->
+    <replace css:theme-children="div#header-top-widget-area-2 div.fixed"
+             css:content-children="div#funlog-social-link" />
+      <!-- social-link icon -->
+      <replace css:content="div#funlog-social-link a">
+        <xsl:for-each css:select="a">
+          <xsl:element name="a">
+            <xsl:choose>
+              <xsl:when test="./@class = 'email'">
+                <xsl:attribute name="class">googleplus-icon social-icon</xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="./@href" /></xsl:attribute>
+                <xsl:element name="i"><xsl:attribute name="class">fa fa-mail-reply</xsl:attribute></xsl:element>
+              </xsl:when>
+              <xsl:when test="./@class = 'webpage'">
+                <xsl:attribute name="class">xing-icon social-icon</xsl:attribute>
+                <xsl:attribute name="target">_blank</xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="./@href" /></xsl:attribute>
+                <xsl:element name="i"><xsl:attribute name="class">fa fa-sitemap</xsl:attribute></xsl:element>
+              </xsl:when>
+              <xsl:when test="./@class = 'linkedin'">
+                <xsl:attribute name="class">linkedin-icon social-icon</xsl:attribute>
+                <xsl:attribute name="target">_blank</xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="./@href" /></xsl:attribute>
+                <xsl:element name="i"><xsl:attribute name="class">fa fa-linkedin</xsl:attribute></xsl:element>
+              </xsl:when>
+              <xsl:when test="./@class = 'twitter'">
+                <xsl:attribute name="class">twitter-icon social-icon</xsl:attribute>
+                <xsl:attribute name="target">_blank</xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="./@href" /></xsl:attribute>
+                <xsl:element name="i"><xsl:attribute name="class">fa fa-twitter</xsl:attribute></xsl:element>
+              </xsl:when>
+              <xsl:when test="./@class = 'facebook'">
+                <xsl:attribute name="class">facebook-icon social-icon</xsl:attribute>
+                <xsl:attribute name="target">_blank</xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="./@href" /></xsl:attribute>
+                <xsl:element name="i"><xsl:attribute name="class">fa fa-facebook</xsl:attribute></xsl:element> 
+              </xsl:when>
+              <xsl:when test="./@class = 'google-plus'">
+                <xsl:attribute name="class">pinterest-icon social-icon</xsl:attribute>
+                <xsl:attribute name="target">_blank</xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="./@href" /></xsl:attribute>
+                <xsl:element name="i"><xsl:attribute name="class">fa fa-google-plus</xsl:attribute></xsl:element>
+              </xsl:when>
+            </xsl:choose>
+            <xsl:apply-templates />
+          </xsl:element>
+        </xsl:for-each>
+      </replace>
+
+      <!-- portal-column-tow, sidebar, right -->
+      <replace css:theme-children="div.row div.span4" css:content-children="div#portal-column-two" />
+
+      <!-- system_widget_list, custom list -->
+      <replace css:content="div.system_widget_list">
+        <xsl:copy>
+          <xsl:attribute name="class">widget ewf_widget_navigation</xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
+
+      <!-- portal-footer -->
+      <replace css:theme-children="div#footer div.textwidget" css:content-children="div#portal-footer" />
+      <replace css:content="div#portal-footer a">
+        <xsl:copy>
+          <xsl:attribute name="style">color:#6DD24E</xsl:attribute>
+          <xsl:attribute name="href"><xsl:value-of select="./@href" /></xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
+
+
+
+      <!-- Type:Folder, content list -->
+      <replace css:theme-children="div.row div.span8" css:content-children="div#content-core" if="$contenttype='Folder'" />
+      <before css:theme-children="div.row div.span8" css:content="h2.no_result" if="$contenttype='Folder'" />
+
+      <replace css:content="div#content-core ul" if="$contenttype='Folder'">
+        <xsl:for-each css:select="li">
+          <div class="blog-post">
+            <div class="blog-post-thumb">
+              <xsl:element name="a">
+                <xsl:attribute name="href"><xsl:value-of select="./a[@class='content_href']/@href" /></xsl:attribute>
+                <xsl:if test="./img/@src != ''">
+                  <xsl:element name="img"><xsl:attribute name="src"><xsl:value-of select="./img/@src" /></xsl:attribute></xsl:element>
+                </xsl:if>
+              </xsl:element>
+            </div><!-- end .blog-post-thumb -->
+            <div class="blog-post-info">
+              <xsl:element name="span"><xsl:value-of css:select="span.day" /></xsl:element>
+              <br/>
+              <xsl:element name="small"><xsl:value-of css:select="span.month" />, <xsl:value-of css:select="span.year" /></xsl:element>
+            </div><!-- end .blog-post-info -->
+            <div class="blog-post-title">
+              <h3>
+                <xsl:element name="a">
+                  <xsl:attribute name="href"><xsl:value-of select="./a[@class='content_href']/@href"/></xsl:attribute>
+                  <xsl:value-of css:select="span.content_title" />
+                </xsl:element>
+              </h3>
+              <xsl:element name="p">
+                <i class="ifc-type"></i>
+                <xsl:value-of css:select="span.type" />
+                <xsl:value-of css:select="span.type_name" />
+                <i class="ifc-thumb_up"></i>
+                <xsl:value-of css:select="span.likeit" /> 
+                <xsl:value-of css:select="span.likeit_count" />
+              </xsl:element>
+              <xsl:element name="p">
+                <i class="ifc-price_tag"></i>
+                <xsl:value-of css:select="span.keywords" />
+                <xsl:for-each css:select="a.keyword">
+                  /
+                  <xsl:element name="a">
+                    <xsl:attribute name="href"><xsl:value-of select="./@href"/></xsl:attribute>
+                    <xsl:value-of select="./text()" />
+                  </xsl:element>
+                </xsl:for-each>
+              </xsl:element>
+            </div><!-- end .blog-post-title -->
+            <xsl:element name="p">
+              <xsl:value-of css:select="p.description" />
+            </xsl:element>
+            <p class="text-right">
+              <xsl:element name="a">
+                <xsl:attribute name="href"><xsl:value-of select="./a[@class='content_href']/@href" /></xsl:attribute>
+                <xsl:attribute name="class">btn</xsl:attribute>
+                Read more
+              </xsl:element>
+            </p>
+          </div><!-- end .blog-post -->
+        </xsl:for-each>
+      </replace>
+
+      <!-- Type:Album, photo list -->
+      <replace css:theme-children="div#page-header-content h1"
+               css:content-children="div#content h1.documentFirstHeading"
+               if="$contenttype='Album'" />
+      <replace css:theme-children="div.span8 div.headline h5"
+               css:content-children="div.documentDescription.description"
+               if="$contenttype='Album'" />
+      <replace css:theme="div.row.album_block" css:content="ul.album_block" if="$contenttype='Album'" />
+
+      <replace css:content="ul.album_block" if="$contenttype='Album'">
+        <div class="row album_block">
+
+          <div class="span2">
+            <xsl:for-each select="./li[position() mod 4 = 1]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <xsl:element name="img">
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/@@images/image/mini</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                  </xsl:element>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <xsl:if test="$isowner">
+                        <xsl:element name="a">
+                          <xsl:attribute name="class">portfolio-item-link</xsl:attribute>
+                          <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/edit</xsl:attribute>
+                          <xsl:element name="i"><xsl:attribute name="class">ifc-pen</xsl:attribute></xsl:element>
+                        </xsl:element>
+                      </xsl:if>
+                      <xsl:element name="a">
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/@@images/image/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                        <xsl:element name="i"><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></xsl:element>
+                      </xsl:element>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <xsl:element name="h6">
+                    <xsl:value-of select="./span"/>
+                  </xsl:element>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span2 -->
+
+          <div class="span2">
+            <xsl:for-each select="./li[position() mod 4 = 2]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <xsl:element name="img">
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/@@images/image/mini</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                  </xsl:element>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <xsl:if test="$isowner">
+                        <xsl:element name="a">
+                          <xsl:attribute name="class">portfolio-item-link</xsl:attribute>
+                          <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/edit</xsl:attribute>
+                          <xsl:element name="i"><xsl:attribute name="class">ifc-pen</xsl:attribute></xsl:element>
+                        </xsl:element>
+                      </xsl:if>
+                      <xsl:element name="a">
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/@@images/image/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                        <xsl:element name="i"><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></xsl:element>
+                      </xsl:element>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <xsl:element name="h6">
+                    <xsl:value-of select="./span"/>
+                  </xsl:element>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span2 -->
+
+          <div class="span2">
+            <xsl:for-each select="./li[position() mod 4 = 3]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <xsl:element name="img">
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/@@images/image/mini</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                  </xsl:element>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <xsl:if test="$isowner">
+                        <xsl:element name="a">
+                          <xsl:attribute name="class">portfolio-item-link</xsl:attribute>
+                          <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/edit</xsl:attribute>
+                          <xsl:element name="i"><xsl:attribute name="class">ifc-pen</xsl:attribute></xsl:element>
+                        </xsl:element>
+                      </xsl:if>
+                      <xsl:element name="a">
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/@@images/image/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                        <xsl:element name="i"><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></xsl:element>
+                      </xsl:element>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <xsl:element name="h6">
+                    <xsl:value-of select="./span"/>
+                  </xsl:element>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span2 -->
+
+          <div class="span2">
+            <xsl:for-each select="./li[position() mod 4 = 0]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <xsl:element name="img">
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/@@images/image/mini</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                  </xsl:element>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <xsl:if test="$isowner">
+                        <xsl:element name="a">
+                          <xsl:attribute name="class">portfolio-item-link</xsl:attribute>
+                          <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/edit</xsl:attribute>
+                          <xsl:element name="i"><xsl:attribute name="class">ifc-pen</xsl:attribute></xsl:element>
+                        </xsl:element>
+                      </xsl:if>
+                      <xsl:element name="a">
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/@@images/image/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                        <xsl:element name="i"><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></xsl:element>
+                      </xsl:element>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <xsl:element name="h6">
+                    <xsl:value-of select="./span"/>
+                  </xsl:element>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span2 -->
+
+        </div><!-- end .row .album_block-->
+      </replace>
+
+
+
+        
+
+
+
+
+  </rules>
 
 </rules>
