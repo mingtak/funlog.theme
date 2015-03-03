@@ -9,9 +9,9 @@
       <!-- Type:Article -->
       <replace css:theme-children="div#page-header-content h1"
                css:content-children="div#content-core p.title" />
-<!--      <replace css:theme-children="div.span8.article_block" css:content="div#content-core" />
+      <replace css:theme-children="div.span8.article_block" css:content="div#content-core" />
       <after css:theme-children="div.span8.article_block" css:content="div.text" />
--->
+
       <!-- modify img@src attribute -->
       <replace css:content="div.text img">
         <xsl:copy>
