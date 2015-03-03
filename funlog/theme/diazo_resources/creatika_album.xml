@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+      <!-- Type:Album, photo list -->
+      <replace css:theme-children="div#page-header-content h1"
+               css:content-children="div#content h1.documentFirstHeading" />
+      <replace css:theme-children="div.span8 div.headline h5"
+               css:content-children="div.documentDescription.description" />
+      <replace css:theme="div.row.album_block" css:content="ul.album_block" />
+
+      <replace css:content="ul.album_block">
+        <div class="row album_block">
+
+          <div class="span2">
+            <xsl:for-each select="./li[position() mod 4 = 1]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <xsl:element name="img">
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/@@images/image/mini</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                  </xsl:element>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <xsl:if test="$isowner">
+                        <xsl:element name="a">
+                          <xsl:attribute name="class">portfolio-item-link</xsl:attribute>
+                          <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/edit</xsl:attribute>
+                          <xsl:element name="i"><xsl:attribute name="class">ifc-pen</xsl:attribute></xsl:element>
+                        </xsl:element>
+                      </xsl:if>
+                      <xsl:element name="a">
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/@@images/image/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                        <xsl:element name="i"><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></xsl:element>
+                      </xsl:element>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <xsl:element name="h6">
+                    <xsl:value-of select="./span"/>
+                  </xsl:element>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span2 -->
+
+          <div class="span2">
+            <xsl:for-each select="./li[position() mod 4 = 2]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <xsl:element name="img">
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/@@images/image/mini</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                  </xsl:element>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <xsl:if test="$isowner">
+                        <xsl:element name="a">
+                          <xsl:attribute name="class">portfolio-item-link</xsl:attribute>
+                          <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/edit</xsl:attribute>
+                          <xsl:element name="i"><xsl:attribute name="class">ifc-pen</xsl:attribute></xsl:element>
+                        </xsl:element>
+                      </xsl:if>
+                      <xsl:element name="a">
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/@@images/image/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                        <xsl:element name="i"><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></xsl:element>
+                      </xsl:element>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <xsl:element name="h6">
+                    <xsl:value-of select="./span"/>
+                  </xsl:element>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span2 -->
+
+          <div class="span2">
+            <xsl:for-each select="./li[position() mod 4 = 3]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <xsl:element name="img">
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/@@images/image/mini</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                  </xsl:element>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <xsl:if test="$isowner">
+                        <xsl:element name="a">
+                          <xsl:attribute name="class">portfolio-item-link</xsl:attribute>
+                          <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/edit</xsl:attribute>
+                          <xsl:element name="i"><xsl:attribute name="class">ifc-pen</xsl:attribute></xsl:element>
+                        </xsl:element>
+                      </xsl:if>
+                      <xsl:element name="a">
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/@@images/image/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                        <xsl:element name="i"><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></xsl:element>
+                      </xsl:element>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <xsl:element name="h6">
+                    <xsl:value-of select="./span"/>
+                  </xsl:element>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span2 -->
+
+          <div class="span2">
+            <xsl:for-each select="./li[position() mod 4 = 0]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <xsl:element name="img">
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/@@images/image/mini</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                  </xsl:element>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <xsl:if test="$isowner">
+                        <xsl:element name="a">
+                          <xsl:attribute name="class">portfolio-item-link</xsl:attribute>
+                          <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/edit</xsl:attribute>
+                          <xsl:element name="i"><xsl:attribute name="class">ifc-pen</xsl:attribute></xsl:element>
+                        </xsl:element>
+                      </xsl:if>
+                      <xsl:element name="a">
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/@@images/image/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./img/@alt"/></xsl:attribute>
+                        <xsl:element name="i"><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></xsl:element>
+                      </xsl:element>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <xsl:element name="h6">
+                    <xsl:value-of select="./span"/>
+                  </xsl:element>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span2 -->
+
+        </div><!-- end .row .album_block-->
+      </replace>
+
+</rules>

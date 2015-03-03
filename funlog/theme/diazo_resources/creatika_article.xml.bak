@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+      <!-- Type:Article -->
+ <replace css:theme="h1" css-content="#content" />
+      <replace css:theme-children="div#page-header-content h1"
+               css:content-children="div#content h1.documentFirstHeading" />
+
+      <replace css:theme-children="div.span8.article_block" css:content-children="div#content-core" />
+
+      <replace css:content="div#content-core">
+<xsl:for-each css:select="div#content-core">
+                    <div class="blog-post">
+                        <div class="blog-post-thumb">
+<xsl:element name="img">
+  <xsl:attribute name="src">lueaaaaaaaaaaaaaaa</attribute>
+</xsl:element>
+<!--                            <img src="_content/blog/770x320-1.png" alt="">                             -->
+
+                        </div><!-- end .blog-post-thumb -->
+
+                        
+
+                        <div class="blog-post-info">
+
+                                
+
+                            15<br>
+
+                            <small>Apr, 2014</small>
+
+                            
+
+                        </div><!-- end .blog-post-info -->
+
+                        
+
+                        <div class="blog-post-title">
+
+                            
+
+                            <h3>New text post on blog</h3>
+
+                            
+
+                            <p>
+
+                                <i class="ifc-pen"></i> 
+
+                                by 
+
+                                <a href="#">John Doe</a>
+
+                                <i class="ifc-price_tag"></i> 
+
+                                <a href="#">Graphic Design</a>
+
+                            </p>
+
+                            
+
+                            <p>
+
+                                <i class="ifc-response"></i>
+
+                                <a href="#">12 comments</a>
+
+                            </p>
+
+                            
+
+                        </div><!-- end .blog-post-title -->
+
+                        
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+
+                        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
+
+                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
+
+                        in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                        
+
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, 
+
+                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta 
+
+                        sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia 
+
+                        consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui 
+
+                        dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora 
+
+                        incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum 
+
+                        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem 
+
+                        vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui 
+
+                        dolorem eum fugiat quo voluptas nulla pariatur?</p>
+
+                        
+
+                        <div class="blog-post-thumb">
+
+                                
+
+                            <img src="_content/blog/770x320-2.png" alt="">
+
+                            
+
+                        </div><!-- end .blog-post-thumb -->
+
+                        
+
+                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam 
+
+                        rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
+
+                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores 
+
+                        eos qui ratione voluptatem sequi nesciunt. </p>
+
+                        
+
+                    </div><!-- end .blog-post -->
+
+</xsl:for-each>
+      </replace>
+
+</rules>

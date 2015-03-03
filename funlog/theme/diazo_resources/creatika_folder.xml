@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+      <!-- Type:Folder, content list -->
+      <replace css:theme-children="div.row div.span8" css:content-children="div#content-core" />
+      <before css:theme-children="div.row div.span8" css:content="h2.no_result" />
+
+      <replace css:content="div#content-core ul">
+        <xsl:for-each css:select="li">
+          <div class="blog-post">
+            <div class="blog-post-thumb">
+              <xsl:element name="a">
+                <xsl:attribute name="href"><xsl:value-of select="./a[@class='content_href']/@href" /></xsl:attribute>
+                <xsl:if test="./img/@src != ''">
+                  <xsl:element name="img"><xsl:attribute name="src"><xsl:value-of select="./img/@src" /></xsl:attribute></xsl:element>
+                </xsl:if>
+              </xsl:element>
+            </div><!-- end .blog-post-thumb -->
+            <div class="blog-post-info">
+              <xsl:element name="span"><xsl:value-of css:select="span.day" /></xsl:element>
+              <br/>
+              <xsl:element name="small"><xsl:value-of css:select="span.month" />, <xsl:value-of css:select="span.year" /></xsl:element>
+            </div><!-- end .blog-post-info -->
+            <div class="blog-post-title">
+              <h3>
+                <xsl:element name="a">
+                  <xsl:attribute name="href"><xsl:value-of select="./a[@class='content_href']/@href"/></xsl:attribute>
+                  <xsl:value-of css:select="span.content_title" />
+                </xsl:element>
+              </h3>
+              <xsl:element name="p">
+                <i class="ifc-type"></i>
+                <xsl:value-of css:select="span.type" />
+                <xsl:value-of css:select="span.type_name" />
+                <i class="ifc-thumb_up"></i>
+                <xsl:value-of css:select="span.likeit" /> 
+                <xsl:value-of css:select="span.likeit_count" />
+              </xsl:element>
+              <xsl:element name="p">
+                <i class="ifc-price_tag"></i>
+                <xsl:value-of css:select="span.keywords" />
+                <xsl:for-each css:select="a.keyword">
+                  /
+                  <xsl:element name="a">
+                    <xsl:attribute name="href"><xsl:value-of select="./@href"/></xsl:attribute>
+                    <xsl:value-of select="./text()" />
+                  </xsl:element>
+                </xsl:for-each>
+              </xsl:element>
+            </div><!-- end .blog-post-title -->
+            <xsl:element name="p">
+              <xsl:value-of css:select="p.description" />
+            </xsl:element>
+            <p class="text-right">
+              <xsl:element name="a">
+                <xsl:attribute name="href"><xsl:value-of select="./a[@class='content_href']/@href" /></xsl:attribute>
+                <xsl:attribute name="class">btn</xsl:attribute>
+                Read more
+              </xsl:element>
+            </p>
+          </div><!-- end .blog-post -->
+        </xsl:for-each>
+      </replace>
+
+</rules>

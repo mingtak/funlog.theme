@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+      <!-- Type:Article -->
+      <replace css:theme-children="div#page-header-content h1"
+               css:content-children="div#content-core p.title" />
+<!--      <replace css:theme-children="div.span8.article_block" css:content="div#content-core" />
+      <after css:theme-children="div.span8.article_block" css:content="div.text" />
+-->
+      <!-- modify img@src attribute -->
+      <replace css:content="div.text img">
+        <xsl:copy>
+          <div class="portfolio-item" style="width:66%;margin:0px auto;">
+            <div class="portfolio-item-preview">
+              <xsl:element name="img">
+                <xsl:attribute name="src"><xsl:value-of select="./@src" /></xsl:attribute>
+                <xsl:attribute name="alt"><xsl:value-of select="//div[@id='content-core']//p[@class='title']" /></xsl:attribute>
+              </xsl:element>
+              <div class="portfolio-item-overlay">
+                <div class="portfolio-item-overlay-actions">
+                  <xsl:element name="a">
+                    <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                    <xsl:attribute name="href"><xsl:value-of select="./@src" /></xsl:attribute>
+                    <xsl:attribute name="title"><xsl:value-of select="//div[@id='content-core']//p[@class='title']" /></xsl:attribute>
+                    <xsl:element name="i">
+                      <xsl:attribute name="class">ifc-zoom_in</xsl:attribute>
+                    </xsl:element>
+                  </xsl:element>
+                </div><!-- end .portfolio-item-overlay-actions -->
+              </div><!-- end .portfolio-item-overlay -->
+            </div><!-- end .portfolio-item-preview -->
+          </div><!-- end .portfolio-item -->
+        </xsl:copy>
+      </replace>
+
+      <!-- content-core -->
+      <replace css:content="div#content-core">
+        <div class="blog-post">
+          <div class="blog-post-thumb">
+            <xsl:element name="img">
+              <xsl:attribute name="src"><xsl:value-of select="./img/@src" /></xsl:attribute>
+            </xsl:element>
+          </div><!-- end .blog-post-thumb -->
+          <xsl:element name="div">
+            <xsl:attribute name="class">blog-post-info</xsl:attribute>
+            <xsl:value-of css:select="p.day" />
+            <xsl:element name="br" />
+            <xsl:element name="small"><xsl:value-of css:select="p.month" />, <xsl:value-of css:select="p.year" /></xsl:element>
+          </xsl:element>
+          <div class="blog-post-title">
+            <xsl:element name="h5">
+              <xsl:value-of css:select="p.description" />
+            </xsl:element>
+            <p>
+              <i class="ifc-thumb_up"></i> 
+              <xsl:value-of css:select="span.likeit" /> <xsl:value-of css:select="span.likeit_count" />
+              <i class="ifc-price_tag"></i> 
+              <xsl:value-of css:select="span.keywords" />
+              <xsl:for-each css:select="a.keyword"> /
+                <xsl:copy>
+                  <xsl:attribute name="href"><xsl:value-of select="./@href" /></xsl:attribute>
+                  <xsl:value-of select="./text()" />
+                </xsl:copy>
+              </xsl:for-each>
+            </p>
+            <p>
+              <i class="ifc-response"></i>
+              <a href="#">12 comments</a>
+            </p>
+          </div><!-- end .blog-post-title -->
+        </div><!-- end .blog-post -->
+      </replace>
+
+</rules>
