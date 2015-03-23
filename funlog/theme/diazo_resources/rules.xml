@@ -5,18 +5,109 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xi="http://www.w3.org/2001/XInclude">
 
-
-    <rules if="$themeid = 'creatika'">
-      <xi:include href="creatika.xml" />
+    <!-- Manager -->
+    <rules if="$issystempage">
+      <xi:include href="system.xml" />
     </rules>
 
+
+   <rules if="$themeid = 'creatika'">
+      <xi:include href="creatika.xml" />
+      <!-- Type:Folder, content list -->
+      <rules if="$contenttype='Folder'">
+        <xi:include href="creatika_folder.xml" />
+      </rules>
+      <!-- Type:Album, photo list -->
+      <rules if="$contenttype='Album'">
+        <xi:include href="creatika_album.xml" />
+      </rules>
+      <!-- Type:Article -->
+      <rules if="$contenttype='Article'">
+        <xi:include href="creatika_article.xml" />
+      </rules>
+      <!-- Type:Travel -->
+      <rules if="$contenttype='Travel'">
+        <xi:include href="creatika_travel.xml" />
+      </rules>
+      <!-- Type:Travel -->
+      <rules if="$contenttype='Profile'">
+        <rules css:if-not-content="div#select_theme">
+          <xi:include href="creatika_profile.xml" />
+        </rules>
+        <rules css:if-content="div#select_theme">
+          <xi:include href="creatika_selecttheme.xml" />
+        </rules>
+      </rules>
+    </rules>
+
+
+    <rules if="$themeid = 'creatika_blue'">
+      <xi:include href="creatika_blue.xml" />
+      <!-- Type:Folder, content list -->
+      <rules if="$contenttype='Folder'">
+        <xi:include href="creatika_blue_folder.xml" />
+      </rules>
+      <!-- Type:Album, photo list -->
+      <rules if="$contenttype='Album'">
+        <xi:include href="creatika_blue_album.xml" />
+      </rules>
+      <!-- Type:Article -->
+      <rules if="$contenttype='Article'">
+        <xi:include href="creatika_blue_article.xml" />
+      </rules>
+      <!-- Type:Travel -->
+      <rules if="$contenttype='Travel'">
+        <xi:include href="creatika_blue_travel.xml" />
+      </rules>
+      <!-- Type:Travel -->
+      <rules if="$contenttype='Profile'">
+        <rules css:if-not-content="div#select_theme">
+          <xi:include href="creatika_blue_profile.xml" />
+        </rules>
+        <rules css:if-content="div#select_theme">
+          <xi:include href="creatika_blue_selecttheme.xml" />
+        </rules>
+      </rules>
+    </rules>
+
+<!--
     <rules if="$themeid = 'porto'">
       <xi:include href="porto.xml" />
     </rules>
-
-
+-->
+<!--
     <rules if="$anonymous">
       <xi:include href="porto.xml"/>
     </rules>
+-->
+
+    <!-- drop viewlets -->
+    <drop css:content="nav#funlog-menu" css:if-content="div.template-edit-form"/>
+    <drop css:content="nav#funlog-menu" css:if-content="div.template-add-form" />
+    <drop css:content="div#portal-searchbox" css:if-content="div.template-edit-form"/>
+    <drop css:content="div#portal-searchbox" css:if-content="div.template-add-form" />
+    <drop css:content="li#portal-personaltools" css:if-content="div.template-edit-form"/>
+    <drop css:content="li#portal-personaltools" css:if-content="div.template-add-form" />
+    <drop css:content="div#viewlet-above-content" css:if-content="div.template-edit-form"/>
+    <drop css:content="div#viewlet-above-content" css:if-content="div.template-add-form" />
+
+    <drop css:content="ul#funlog-slide-banner" css:if-content="div.template-add-form" />
+    <drop css:content="ul#funlog-slide-banner" css:if-content="div.template-add-form" />
+
+    <drop css:content="div#portal-column-two" css:if-content="div.template-edit-form"/>
+    <drop css:content="div#portal-column-two" css:if-content="div.template-add-form" />
+    <drop css:content="div#funlog-social-link" css:if-content="div.template-edit-form"/>
+    <drop css:content="div#funlog-social-link" css:if-content="div.template-add-form" />
+    <drop css:content="div#viewlet-below-content" css:if-content="div.template-edit-form"/>
+    <drop css:content="div#viewlet-below-content" css:if-content="div.template-add-form" />
+    <drop css:content="div#portal-colophon" css:if-content="div.template-edit-form"/>
+    <drop css:content="div#portal-colophon" css:if-content="div.template-add-form" />
+    <drop css:content="ul#portal-siteactions" css:if-content="div.template-edit-form"/>
+    <drop css:content="ul#portal-siteactions" css:if-content="div.template-add-form" />
+    <drop css:content="div#edit-bar" css:if-content="div.template-edit-form"/>
+    <drop css:content="div#edit-bar" css:if-content="div.template-add-form" />
+    <drop css:content="div.managePortletsLink" />
+    <drop css:content="div#portletmanager-plone-leftcolumn" />
+    <drop content="//div[@id='portletmanager-plone-rightcolumn']/div[@class='portletAssignments'][2]" />
 
 </rules>

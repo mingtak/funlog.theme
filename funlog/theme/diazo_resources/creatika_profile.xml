@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+      <!-- Type:Article -->
+      <replace css:theme-children="div#page-header-content h1"
+               css:content-children="div#content-core h3.about_me" />
+      <replace css:theme-children="div.span8.article_block" css:content="div#content-core" />
+
+      <!-- modify img@src attribute -->
+      <replace css:content="div#content-core">
+        <xsl:copy>
+          <div class="row">
+            <div class="span8">
+              <div class="headline" style="margin-top:2px">
+                <h1 ><xsl:value-of select="./p[@class='title']" /></h1>
+		<span class="bullet"></span>
+              </div><!-- end .headline -->
+            </div><!-- end .span12 -->
+          </div>
+          <div class="row">
+            <div class="span3">
+              <div class="portfolio-item" style="width:100%;margin:0px auto;">
+                <div class="portfolio-item-preview">
+                  <img><xsl:attribute name="src"><xsl:value-of select="./img/@src" />/preview</xsl:attribute></img>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <a class="magnificPopup-gallery portfolio-item-zoom">
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src" />/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of css:select="div#content-core p.title" /></xsl:attribute>
+                        <i class="ifc-zoom_in"></i>
+                      </a>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+              </div><!-- end .portfolio-item -->
+              <br />
+              <xsl:copy-of select="//div[@id='addthis_sharing']" />
+            </div><!-- end .span3 -->
+            <div class="span5">
+              <h5><xsl:value-of css:select="div#content-core p.description"/></h5>
+              <hr/>
+              <h3><xsl:value-of css:select="div#content-core div.blog span" />
+                <xsl:copy-of css:select="div#content-core div.blog a" />
+              </h3>
+              <p><xsl:copy-of css:select="div#content-core p.blog_description" /></p>
+              <xsl:copy-of css:select="div#content-core h3.latest_publish" />
+              <ul>
+                <xsl:attribute name="class">check</xsl:attribute>
+                <xsl:copy-of css:select="ul.latest_article li" />
+              </ul>
+              <div class="text-right">
+                <a class="btn btn-green">
+                  <xsl:attribute name="href"><xsl:value-of select="./a[@class='show_more']/@href" /></xsl:attribute>
+                  <xsl:value-of select="./a[@class='show_more']" />
+                </a>
+              </div>
+            </div><!-- end .span5 -->
+          </div>
+        </xsl:copy>
+      </replace>
+
+</rules>

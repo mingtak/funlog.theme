@@ -12,8 +12,18 @@
     <theme href="creatika/diazo_folder.html" if="$contenttype='Folder'" />
     <theme href="creatika/diazo_article.html" if="$contenttype='Article'" />
     <theme href="creatika/diazo_travel.html" if="$contenttype='Travel'" />
+    <theme href="creatika/diazo_selecttheme.html" css:if-content="div#select_theme" />
+    <theme href="creatika/diazo_profile.html" if="$contenttype='Profile'" />
     <notheme css:if-content=".template-add-form" />
     <notheme css:if-content=".template-edit-form" />
+    <notheme css:if-content="body.template-edit" />
+    <notheme css:if-content="body.template-manage-portlets" />
+
+    <!-- drop -->
+    <drop css:content="nav#funlog-menu" css:if-content="body.template-manage-portlets" />
+    <drop css:content="ul#funlog-slide-banner" css:if-content="body.template-manage-portlets" />
+    <drop css:content="div#portal-personaltools-wrapper" css:if-content="body.template-manage-portlets" />
+    <drop css:content="div#portal-searchbox" css:if-content="body.template-manage-portlets" />
 
     <!-- nav menu -->
     <replace css:theme-children="ul#menu" css:content-children="ul#funlog-menu-ul" />
@@ -24,6 +34,19 @@
           <xsl:apply-templates />
         </xsl:copy>
       </replace>
+
+      <!-- dd.actionMenuContent -->
+      <replace css:content="li.top-level-menu.manager ul">
+        <ul>
+<xsl:for-each select="//dl[@id='plone-contentmenu-workflow']//dd[@class='actionMenuContent']/ul/li/a[@id != 'workflow-transition-advanced']">
+  <xsl:copy-of select="." />
+<!--    <xsl:apply-templates />
+  </xsl:copy-of> -->
+</xsl:for-each>
+        </ul>
+      </replace>
+<!--      <drop content="//dl[@id='plone-contentmenu-workflow']//dd[@class='actionMenuContent']/ul/li"/> -->
+
       <!-- current selected -->
       <replace css:content="li.top-level-menu.selected">
         <xsl:copy>
@@ -33,7 +56,8 @@
       </replace>
 
     <!-- ifolder_iportaltop_slide -->
-    <replace css:theme="div.fullwidthbanner > ul" css:content="ul#funlog-slide-banner" />
+<!--    <replace css:theme="div.fullwidthbanner > ul" css:content="ul#funlog-slide-banner" /> -->
+    <replace css:theme="div.fullwidthbanner ul" css:content="ul#funlog-slide-banner" />
       <!-- slide show -->
       <replace css:content="ul#funlog-slide-banner li">
         <xsl:copy>
@@ -73,6 +97,45 @@
     <copy attributes="action method" css:theme="form#custom-search-form" css:content="div.funlog_site_search form" />
     <copy attributes="name placeholder" css:theme="form#custom-search-form input" css:content="div.funlog_site_search form input" />
 
+
+    <!-- site social-link -->
+    <replace css:theme-children="div#footer-top div.widget.ewf_widget_social_media"
+             css:content="div#funlog_viewlet_registry" />
+    <replace css:content="div#funlog_viewlet_registry">
+      <h3 class="widget-title" style="margin-bottom:20px"><xsl:value-of select="./p[@class='title']" /></h3>
+      <div class="social-icon-round fixed">
+        <xsl:if test="./p[@class='facebook']">
+          <a href="#" class="facebook-icon social-icon" target="_blank">
+            <xsl:attribute name="href"><xsl:value-of select="./p[@class='facebook']" /></xsl:attribute>
+            <i class="fa fa-facebook"></i>
+          </a>
+        </xsl:if>
+        <xsl:if test="./p[@class='googleplus']">
+          <a href="#" class="googleplus-icon social-icon" target="_blank">
+            <xsl:attribute name="href"><xsl:value-of select="./p[@class='googleplus']" /></xsl:attribute>
+            <i class="fa fa-google-plus"></i>
+          </a>
+        </xsl:if>
+        <xsl:if test="./p[@class='twitter']">
+          <a href="#" class="twitter-icon social-icon" target="_blank">
+            <xsl:attribute name="href"><xsl:value-of select="./p[@class='twitter']" /></xsl:attribute>
+            <i class="fa fa-twitter"></i>
+          </a>
+        </xsl:if>
+        <xsl:if test="./p[@class='linkedin']">
+          <a href="#" class="linkedin-icon social-icon" target="_blank">
+            <xsl:attribute name="href"><xsl:value-of select="./p[@class='linkedin']" /></xsl:attribute>
+            <i class="fa fa-linkedin"></i>
+          </a>
+        </xsl:if>
+        <xsl:if test="./p[@class='email']">
+          <a href="#" class="pinterest-icon social-icon">
+            <xsl:attribute name="href">mailto:<xsl:value-of select="./p[@class='email']" /></xsl:attribute>
+            <i class="fa fa-mail-reply"></i>
+          </a>
+        </xsl:if>
+      </div>
+    </replace>
 
     <!-- social-link -->
     <replace css:theme-children="div#header-top-widget-area-2 div.fixed"
@@ -123,6 +186,9 @@
         </xsl:for-each>
       </replace>
 
+      <!-- google ad -->
+      <before css:theme-children="div.row div.span4" css:content-children="div#portal-column-one" />
+
       <!-- portal-column-tow, sidebar, right -->
       <replace css:theme-children="div.row div.span4" css:content-children="div#portal-column-two" />
 
@@ -132,6 +198,89 @@
           <xsl:attribute name="class">widget ewf_widget_navigation</xsl:attribute>
           <xsl:apply-templates />
         </xsl:copy>
+      </replace>
+
+      <!-- system_widget_list, profile -->
+      <replace css:content="div#portlet_profile">
+        <div class="widget widget_text">
+          <h3 class="widget-title"><xsl:value-of css:select="div#portlet_profile h3" /></h3>
+          <div class="textwidget">
+            <div class="testimonial">
+              <blockquote>
+                <p class="text-left">
+                  <em><xsl:value-of css:select="div#portlet_profile .profile_description" />
+                  </em>
+                </p>
+              </blockquote>
+              <p class="text-right">
+                <xsl:element name="img">
+                  <xsl:attribute name="src"><xsl:value-of select="//div[@id='portlet_profile']/img/@src" /></xsl:attribute>
+                </xsl:element>
+                <em><xsl:value-of css:select="div#portlet_profile .profile_title" /></em>
+              </p>
+            </div><!-- end .testimonial -->
+          </div><!-- end .textwidget -->
+        </div>
+      </replace>
+
+      <!-- portlet, follow me -->
+      <replace css:content="div#portlet_followme">
+        <div class="widget ewf_widget_flickr">
+          <h3 class="widget-title"><span><xsl:value-of select="./h3[@class='widget_title']" /></span></h3>
+          <div class="flickr-feed">
+            <xsl:copy-of select=".//a[@class='url']" />
+            <xsl:copy-of select=".//p[@class='total']" />
+          </div><!-- end #flickr-feed -->
+
+          <div class="text-right">
+            <xsl:if test=".//a[@class='cancel']">
+              <a class="btn btn-green">
+                <xsl:attribute name="href"><xsl:value-of select=".//a[@class='cancel']/@href" /></xsl:attribute>
+                <xsl:value-of select=".//a[@class='cancel']" />
+              </a>
+            </xsl:if>
+            <xsl:if test=".//a[@class='join']">
+              <a class="btn btn-green">
+                <xsl:attribute name="href"><xsl:value-of select=".//a[@class='join']/@href" /></xsl:attribute>
+                <xsl:value-of select=".//a[@class='join']" />
+              </a>
+            </xsl:if>
+            <xsl:if test=".//a[@class='anonymous']">
+              <a class="btn btn-green">
+                <xsl:attribute name="href"><xsl:value-of select=".//a[@class='anonymous']/@href" /></xsl:attribute>
+                <xsl:value-of select=".//a[@class='anonymous']" />
+              </a>
+            </xsl:if>
+          </div>
+        </div>
+      </replace>
+
+
+      <!-- portlet, latest -->
+      <replace css:content="ul#portlet_latest">
+        <div class="widget widget_recent_entries">
+          <h3 class="widget-title"><xsl:value-of css:select="ul#portlet_latest h3" /></h3>
+          <ul>
+            <xsl:for-each select="./li">
+              <li>
+                <xsl:if test="./img">
+                  <img class="post-date" style="background-color:rgba(109, 210, 78, 0);">
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src" /></xsl:attribute>
+                  </img>
+                </xsl:if>
+                <a class="title" href="#">
+                  <xsl:attribute name="href"><xsl:value-of select="./p[@class='url']" /></xsl:attribute>
+                  <xsl:value-of select="./p[@class='title']" />
+                </a>
+                <p><xsl:value-of select="./p[@class='description']" /></p>
+                <div class="text-right">
+                  <xsl:value-of select="./p[@class='modified']" />
+                  <xsl:value-of select="./p[@class='date']" />
+                </div>
+              </li>
+            </xsl:for-each>
+          </ul>
+        </div>
       </replace>
 
       <!-- portal-footer -->
@@ -144,26 +293,71 @@
         </xsl:copy>
       </replace>
 
+      <!-- text style: ul-->
+      <replace css:content="div#content-core ul">
+        <xsl:copy>
+          <xsl:attribute name="class">pin</xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
 
-      <!-- Type:Folder, content list -->
-      <rules if="$contenttype='Folder'">
-        <xi:include href="++theme++funlog.theme/creatika_folder.xml" />
-      </rules>
+      <!-- text style: information -->
+      <replace css:content="div#content-core .information">
+        <xsl:copy>
+          <xsl:attribute name="class">alert info</xsl:attribute>
+          <xsl:attribute name="style">text-align:left</xsl:attribute>
+          <i class="ifc-info"></i>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
 
-      <!-- Type:Album, photo list -->
-      <rules if="$contenttype='Album'">
-        <xi:include href="++theme++funlog.theme/creatika_album.xml" />
-      </rules>
+      <!-- text style: success -->
+      <replace css:content="div#content-core .success">
+        <xsl:copy>
+          <xsl:attribute name="class">alert success</xsl:attribute>
+          <xsl:attribute name="style">text-align:left</xsl:attribute>
+          <i class="ifc-security_checked"></i>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
 
-      <!-- Type:Article -->
-      <rules if="$contenttype='Article'">
-        <xi:include href="++theme++funlog.theme/creatika_article.xml" />
-      </rules>
+     <!-- text style: warning -->
+      <replace css:content="div#content-core .warning">
+        <xsl:copy>
+          <xsl:attribute name="class">alert warning</xsl:attribute>
+          <xsl:attribute name="style">text-align:left</xsl:attribute>
+          <i class="ifc-error"></i>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
 
-      <!-- Type:Travel -->
-      <rules if="$contenttype='Travel'">
-        <xi:include href="++theme++funlog.theme/creatika_travel.xml" />
-      </rules>
+      <!-- text style: error-->
+      <replace css:content="div#content-core .error">
+        <xsl:copy>
+          <xsl:attribute name="class">alert error</xsl:attribute>
+          <xsl:attribute name="style">text-align:left</xsl:attribute>
+          <i class="ifc-close"></i>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
+
+      <!-- content, table -->
+      <replace css:content="table">
+        <xsl:copy>
+          <xsl:attribute name="class">table-bordered table-striped</xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
+
+      <!-- Ad sense banner -->
+      <before theme-children="//div[@id='content']/div[@class='row'][1]/div[1]" css:content="div.adscript" />
+
+      <replace css:content="div#content-core .text">
+        <xsl:copy>
+          <xsl:attribute name="style">font-size:1.12em;</xsl:attribute>
+          <xsl:apply-templates />
+        </xsl:copy>
+      </replace>
 
   </rules>
 

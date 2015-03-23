@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+  <rules css:if-content="#visual-portal-wrapper">
+
+    <theme href="system/diazo.html" />
+
+
+
+<replace css:theme="head title" css:content="head title" />
+<replace css:theme="head meta" css:content="head meta" />
+<replace theme="//head/link[@rel='icon']" content="//head/lnk[@rel='shortcut icon']" />
+
+
+<!-- logo -->
+<drop css:theme="div.navbar-header a" />
+<!--    <replace css:theme="div.navbar-header a" css:content="a#portal-logo" />
+    <replace css:content="a#portal-logo">
+      <a class="navbar-brand" href="/">
+        <img style="width:33%">
+          <xsl:attribute name="src"><xsl:value-of select="//a[@id='portal-logo']/img/@src"/></xsl:attribute>
+          <xsl:attribute name="alt"><xsl:value-of select="//a[@id='portal-logo']/img/@alt"/></xsl:attribute>
+        </img>
+      </a>
+    </replace>
+-->
+
+<!-- social icon with header -->
+<drop css:theme-children="ul.nav.navbar-nav.social-nav" />
+
+    <replace css:theme="div#revolution-shortcode" css:content="div#site_homepage_view img" />
+    <replace css:content="div#site_homepage_view img">
+      <div id="revolution-shortcode" class="revolution-wrap revslider-initialised tp-simpleresponsive hovered" style="height: 500px;">
+            <ul style="display: block; overflow: hidden; width: 100%; height: 100%; max-height: none;">
+                <li data-transition="zoomout" data-slotamount="7" data-masterspeed="1100" style="width: 100%; height: 100%; overflow: hidden; visibility: visible; left: 0px; top: 0px; opacity: 1; position: absolute; z-index: 20;">
+                    <div class="slotholder" style="width:100%;height:100%;" data-duration="undefined" data-zoomstart="undefined" data-zoomend="undefined" data-rotationstart="undefined" data-rotationend="undefined" data-ease="undefined" data-bgpositionend="undefined" data-bgposition="left top" data-kenburns="undefined" data-easeme="undefined" data-bgfit="cover" data-bgfitend="undefined" data-owidth="undefined" data-oheight="undefined">
+                      <div class="tp-bgimg defaultimg"
+                           data-lazyload="undefined"
+                           data-bgfit="cover"
+                           data-bgposition="left top"
+                           data-bgrepeat="no-repeat"
+                           data-lazydone="undefined"
+                           data-src=""
+                           style="width: 100%; height: 100%; opacity: 1; background-image: url(slider03.jpg);
+                                  background-color: rgba(0, 0, 0, 0); background-size: cover; background-position: 0% 0%;
+                                  background-repeat: no-repeat;">
+                        <xsl:attribute name="data-src"><xsl:value-of select="//div[@id='site_homepage_view']/img/@src" /></xsl:attribute>
+                        <xsl:attribute name="style">
+     width: 100%; height: 100%; opacity: 1; background-image: url(<xsl:value-of select="//div[@id='site_homepage_view']/img/@src" />);
+     background-color: rgba(0, 0, 0, 0); background-size: cover; background-position: 0% 0%;
+     background-repeat: no-repeat;"
+                        </xsl:attribute>
+                      </div>
+                    </div>
+                    <div class="tp-caption fade stb rev-caption start" data-x="center" data-y="center" data-hoffset="0" data-voffset="-1" data-speed="800" data-start="1300" data-easing="Power4.easeOut" data-endspeed="300" data-endeasing="Power1.easeIn" data-captionhidden="off" style="z-index: 6; min-height: 0px; min-width: 0px; white-space: nowrap; line-height: 16px; border-width: 0px; margin: 0px; padding: 0px; font-size: 14px; visibility: visible; opacity: 1; top: 112px; left: 0px; transition: opacity 0.15s linear 0s; -webkit-transition: opacity 0.15s linear 0s; transform: none; -webkit-transform: none;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div class="big-inner">
+<!--                                        <h2><xsl:value-of select="//div[@id='site_homepage_view']/h1" /></h2>
+                                        <p><xsl:value-of select="//div[@id='site_homepage_view']/p[@class='description']" /></p>
+-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+            </ul>
+        <div class="tp-loader" style="display: none;"></div>
+        <div class="tp-bannertimer" style="visibility: hidden; overflow: hidden; width: 20.7919911012236%;"></div>
+      </div>
+
+    </replace>
+
+    <!-- section -->
+    <replace css:theme="section.statement.grey.text-center" css:content="div#site_homepage_view" />
+    <replace css:content="div#site_homepage_view">
+      <section class="statement grey text-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <h2><xsl:value-of select="//div[@id='site_homepage_view']/h1" /></h2>
+              <div class="content">
+                <p><xsl:value-of select="//div[@id='site_homepage_view']/p[@class='description']" /></p>
+              </div>
+              <a href="#" class="btn btn-default">
+                <xsl:attribute name="href"><xsl:value-of select="//div[@id='site_homepage_view']/a/@href" /></xsl:attribute>
+                <xsl:value-of select="//div[@id='site_homepage_view']/a" />
+              </a>
+            </div>
+          </div>
+        </div>    
+      </section>  
+    </replace>
+
+
+  </rules>
+
+</rules>

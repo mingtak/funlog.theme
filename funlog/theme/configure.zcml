@@ -44,4 +44,10 @@
     permission="zope2.View"
     class=".parameters.IsOwner" />
 
+  <browser:page
+    for="*"
+    name="is_system_page"
+    permission="zope2.View"
+    class=".parameters.IsSystemPage" />
+
 </configure>

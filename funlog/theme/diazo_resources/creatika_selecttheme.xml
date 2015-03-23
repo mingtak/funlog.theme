@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+      <!-- Type:Album, photo list -->
+      <replace css:theme-children="div#page-header-content h1"
+               css:content-children="div#content h1.documentFirstHeading" />
+      <replace css:theme-children="div.row.album_block" css:content="div#select_theme form" />
+
+      <replace css:content="div#select_theme form ul">
+        <div class="row">
+          <div class="span3">
+            <xsl:for-each select="./li[position() mod 4 = 1]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <img>
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/preview</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./h4"/></xsl:attribute>
+                  </img>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <a>
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./h4"/></xsl:attribute>
+                        <i><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></i>
+                      </a>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <input type="radio" name="theme" style="display:inline">
+                    <xsl:attribute name="value"> <xsl:value-of select="./input[@type='radio']/@value" /></xsl:attribute>
+                    <xsl:if test="./input[@type='radio']/@checked = 'checked'">
+                      <xsl:attribute name="checked">checked</xsl:attribute>
+                    </xsl:if>
+                  </input>
+                  <strong>
+                    <xsl:value-of select="./h4"/>
+                  </strong>
+                  <input type="submit" style="display:inline; float:right">
+                    <xsl:attribute name="value"><xsl:value-of select="./input[@type='submit']/@value" /></xsl:attribute>
+                  </input>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+
+            </xsl:for-each>
+          </div><!-- end .span3 -->
+          <div class="span3">
+            <xsl:for-each select="./li[position() mod 4 = 2]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <img>
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/preview</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./h4"/></xsl:attribute>
+                  </img>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <a>
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./h4"/></xsl:attribute>
+                        <i><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></i>
+                      </a>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <input type="radio" name="theme" style="display:inline">
+                    <xsl:attribute name="value"> <xsl:value-of select="./input[@type='radio']/@value" /></xsl:attribute>
+                    <xsl:if test="./input[@type='radio']/@checked = 'checked'">
+                      <xsl:attribute name="checked">checked</xsl:attribute>
+                    </xsl:if>
+                  </input>
+                  <strong>
+                    <xsl:value-of select="./h4"/>
+                  </strong>
+                  <input type="submit" style="display:inline; float:right">
+                    <xsl:attribute name="value"><xsl:value-of select="./input[@type='submit']/@value" /></xsl:attribute>
+                  </input>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span3 -->
+
+          <div class="span3">
+            <xsl:for-each select="./li[position() mod 4 = 3]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <img>
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/preview</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./h4"/></xsl:attribute>
+                  </img>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <a>
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./h4"/></xsl:attribute>
+                        <i><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></i>
+                      </a>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <input type="radio" name="theme" style="display:inline">
+                    <xsl:attribute name="value"> <xsl:value-of select="./input[@type='radio']/@value" /></xsl:attribute>
+                    <xsl:if test="./input[@type='radio']/@checked = 'checked'">
+                      <xsl:attribute name="checked">checked</xsl:attribute>
+                    </xsl:if>
+                  </input>
+                  <strong>
+                    <xsl:value-of select="./h4"/>
+                  </strong>
+                  <input type="submit" style="display:inline; float:right">
+                    <xsl:attribute name="value"><xsl:value-of select="./input[@type='submit']/@value" /></xsl:attribute>
+                  </input>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span3 -->
+
+          <div class="span3">
+            <xsl:for-each select="./li[position() mod 4 = 0]">
+              <div class="portfolio-item">
+                <div class="portfolio-item-preview">
+                  <img>
+                    <xsl:attribute name="src"><xsl:value-of select="./img/@src"/>/preview</xsl:attribute>
+                    <xsl:attribute name="alt"><xsl:value-of select="./h4"/></xsl:attribute>
+                  </img>
+                  <div class="portfolio-item-overlay">
+                    <div class="portfolio-item-overlay-actions">
+                      <a>
+                        <xsl:attribute name="class">magnificPopup-gallery portfolio-item-zoom</xsl:attribute>
+                        <xsl:attribute name="href"><xsl:value-of select="./img/@src"/>/slide</xsl:attribute>
+                        <xsl:attribute name="title"><xsl:value-of select="./h4"/></xsl:attribute>
+                        <i><xsl:attribute name="class">ifc-zoom_in</xsl:attribute></i>
+                      </a>
+                    </div><!-- end .portfolio-item-overlay-actions -->
+                  </div><!-- end .portfolio-item-overlay -->
+                </div><!-- end .portfolio-item-preview -->
+                <div class="portfolio-item-description">
+                  <input type="radio" name="theme" style="display:inline">
+                    <xsl:attribute name="value"> <xsl:value-of select="./input[@type='radio']/@value" /></xsl:attribute>
+                    <xsl:if test="./input[@type='radio']/@checked = 'checked'">
+                      <xsl:attribute name="checked">checked</xsl:attribute>
+                    </xsl:if>
+                  </input>
+                  <strong>
+                    <xsl:value-of select="./h4"/>
+                  </strong>
+                  <input type="submit" style="display:inline; float:right">
+                    <xsl:attribute name="value"><xsl:value-of select="./input[@type='submit']/@value" /></xsl:attribute>
+                  </input>
+                </div><!-- end .portfolio-item-description -->
+              </div><!-- end .portfolio-item -->
+            </xsl:for-each>
+          </div><!-- end .span3 -->
+        </div>
+
+      </replace>
+
+</rules>
